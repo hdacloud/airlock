@@ -29,7 +29,7 @@ jobs:
         with:
           credentials: ${{ secrets.QUAY_AUTH }}
           file: dist/Dockerfile
-          push: quay.io/coreos/airlock
+          push: quay.io/hdacloud/airlock
           arches: amd64 arm64
           # Speed up PR CI by skipping non-amd64
           pr-arches: amd64
