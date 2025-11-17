@@ -20,6 +20,8 @@ type Settings struct {
 	ClientCertPubPath string
 	ClientCertKeyPath string
 	EtcdTxnTimeout    time.Duration
+	EtcdUser          string
+	EtcdPassword      string
 
 	LockGroups map[string]uint64
 }

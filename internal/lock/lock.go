@@ -28,7 +28,7 @@ type Manager struct {
 }
 
 // NewManager returns a new lock manager, ensuring the underlying semaphore is initialized.
-func NewManager(ctx context.Context, etcdURLs []string, certPubPath string, certKeyPath string, txnTimeoutMs time.Duration, group string, slots uint64) (*Manager, error) {
+func NewManager(ctx context.Context, etcdURLs []string, certPubPath string, certKeyPath string, user string, pass string, txnTimeoutMs time.Duration, group string, slots uint64) (*Manager, error) {
 	tlsInfo := transport.TLSInfo{
 		CertFile: certPubPath,
 		KeyFile:  certKeyPath,
@@ -43,6 +43,8 @@ func NewManager(ctx context.Context, etcdURLs []string, certPubPath string, cert
 		Endpoints:   etcdURLs,
 		DialTimeout: time.Duration(txnTimeoutMs) * time.Millisecond,
 		TLS:         tlsConfig,
+		Username:    user,
+		Password:    pass,
 	})
 	if err != nil {
 		return nil, err

@@ -35,6 +35,8 @@ type etcd3Section struct {
 	TxnTimeoutMs      *uint64  `toml:"transaction_timeout_ms"`
 	ClientCertPubPath string   `toml:"client_cert_pub_path"`
 	ClientCertKeyPath string   `toml:"client_cert_key_path"`
+	User              string   `toml:"user"`
+	Password          string   `toml:"password"`
 }
 
 // lockSection holds the optional `lock` fragment
@@ -133,6 +135,12 @@ func mergeEtcd(settings *Settings, cfg etcd3Section) {
 	}
 	if len(cfg.ClientCertKeyPath) > 0 {
 		settings.ClientCertKeyPath = cfg.ClientCertKeyPath
+	}
+	if cfg.User != "" {
+		settings.EtcdUser = cfg.User
+	}
+	if cfg.Password != "" {
+		settings.EtcdPassword = cfg.Password
 	}
 }
 
